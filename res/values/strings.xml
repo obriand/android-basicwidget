@@ -4,5 +4,8 @@
     <string name="app_name">android-basicwidget</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="widget_title_tv">Widget Title</string>
+    <string name="widget_content_tv">Widget Content</string>
+    <string name="widget_sun_img_desc">Sun image</string>
 
 </resources>
