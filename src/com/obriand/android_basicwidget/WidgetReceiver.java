@@ -20,7 +20,7 @@ public class WidgetReceiver extends AppWidgetProvider
 	{
 		final int N = appWidgetIds.length;
 	
-		// Pour chaque AppWidget MonWidgetDeveloppez (n'oubliez pas qu'on peut en ajouter tant qu'on veut), on les met à jour :
+		// Pour chaque AppWidget MonWidgetDeveloppez (n'oubliez pas qu'on peut en ajouter tant qu'on veut), on les met a jour :
 		for (int i = 0; i < N; i++) 
 		{
 			int appWidgetId = appWidgetIds[i];
@@ -28,21 +28,21 @@ public class WidgetReceiver extends AppWidgetProvider
 		}
 	}
 
-	// Cette méthode est entièrement libre, à vous de la modifier comme bon vous semble. Voici toutefois une base minimaliste
+	// Cette methode est entierement libre, a vous de la modifier comme bon vous semble. Voici toutefois une base minimaliste
 	static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) 
 	{
-		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_main); // On récupère les Views de notre layout
+		RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_main); // On recupere les Views de notre layout
 		views.setTextViewText(R.id.content, "Hello Developpez !"); // On peut agir sur ces vues
-		appWidgetManager.updateAppWidget(appWidgetId, views); // On met ensuite à jour l'affichage du widget
+		appWidgetManager.updateAppWidget(appWidgetId, views); // On met ensuite a jour l'affichage du widget
 		
-		// On prépare un intent à lancer lors d'un clic
+		// On prépare un intent a lancer lors d'un clic
 		Intent intent = new Intent(context, WidgetReceiver.class);
 		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-		intent.setAction(ACTION_LANCER_APPLICATION); // Je crée ici ma propre action
+		intent.setAction(ACTION_LANCER_APPLICATION); // Je cree ici ma propre action
 
 		// On lie l'intent à l'action
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-		views.setOnClickPendingIntent(R.id.text_layout, pendingIntent); // L'id de la view qui réagira au clic sur le widget.
+		views.setOnClickPendingIntent(R.id.text_layout, pendingIntent); // L'id de la view qui reagira au clic sur le widget.
 		appWidgetManager.updateAppWidget(appWidgetId, views);
 	}
 	
