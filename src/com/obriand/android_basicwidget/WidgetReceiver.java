@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -28,21 +29,25 @@ public class WidgetReceiver extends AppWidgetProvider
 	// Cette methode est entierement libre, a vous de la modifier comme bon vous semble. Voici toutefois une base minimaliste
 	public void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) 
 	{
-		Toast.makeText(context, "onUpdate", Toast.LENGTH_SHORT).show(); 
+		Toast.makeText(context, "updateAppWidget:"+appWidgetId, Toast.LENGTH_SHORT).show(); 
 		
 		RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_main); // On recupere les Views de notre layout
-		remoteViews.setTextViewText(R.id.widget_title_tv, "Hello Developpez !"); // On peut agir sur ces vues
-		appWidgetManager.updateAppWidget(appWidgetId, remoteViews); // On met ensuite a jour l'affichage du widget
+		remoteViews.setTextViewText(R.id.widget_title_tv, "Title updated !"); // On peut agir sur ces vues
 		
 		// On prepare un intent a lancer lors d'un clic
 		Intent intent = new Intent(context, WidgetReceiver.class);
 		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
 		intent.setAction(ACTION_LANCER_APPLICATION); // Je cree ici ma propre action
-
 		// On lie l'intent a l'action
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 		remoteViews.setOnClickPendingIntent(R.id.widget_content_tv, pendingIntent); // L'id de la view qui reagira au clic sur le widget.
-		appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
+		
+		// Un intent pour lancer Google sur un click sur un autre TextView
+		Intent googleIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+		PendingIntent pendingGoogleIntent = PendingIntent.getActivity(context, 0, googleIntent, 0);
+		remoteViews.setOnClickPendingIntent(R.id.widget_google_tv, pendingGoogleIntent);
+		
+		appWidgetManager.updateAppWidget(appWidgetId, remoteViews); // On met ensuite a jour l'affichage du widget
 	}
 	
 	@Override
