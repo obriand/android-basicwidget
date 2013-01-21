@@ -9,7 +9,7 @@
     android:background="@drawable/widget_border_shape" >
     
     <ImageView 
-	   android:id="@+id/image"
+	   android:id="@+id/widget_image_iv"
 	   android:contentDescription="@string/widget_sun_img_desc"
 	   android:src="@drawable/sun"
 	   android:layout_width="30dip"
@@ -17,14 +17,14 @@
     </ImageView>    
 
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    android:id="@+id/text_layout"
+	    android:id="@+id/widget_text_zone_layout"
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"    
 	    android:layout_margin="8dip">    
   
 	<TextView
-	    android:id="@+id/title"
+	    android:id="@+id/widget_title_tv"
 	    style="@android:style/TextAppearance.Medium"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
 	</TextView>
 	
 	<TextView
-	    android:id="@+id/content"
+	    android:id="@+id/widget_content_tv"
 	    style="@android:style/TextAppearance.Medium"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
