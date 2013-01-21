@@ -27,6 +27,9 @@ public class WidgetReceiver extends AppWidgetProvider
 			updateAppWidget(context, appWidgetManager, appWidgetId);
 		}
 	}
+	
+	
+	
 
 	// Cette methode est entierement libre, a vous de la modifier comme bon vous semble. Voici toutefois une base minimaliste
 	static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) 
@@ -40,7 +43,7 @@ public class WidgetReceiver extends AppWidgetProvider
 		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
 		intent.setAction(ACTION_LANCER_APPLICATION); // Je cree ici ma propre action
 
-		// On lie l'intent à l'action
+		// On lie l'intent a l'action
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 		views.setOnClickPendingIntent(R.id.text_layout, pendingIntent); // L'id de la view qui reagira au clic sur le widget.
 		appWidgetManager.updateAppWidget(appWidgetId, views);
