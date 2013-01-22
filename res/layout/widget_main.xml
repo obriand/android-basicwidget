@@ -50,14 +50,27 @@
 	</TextView>
 	
 	<TextView
-	    android:id="@+id/widget_content_tv"
+	    android:id="@+id/widget_activity_tv"
 	    style="@android:style/TextAppearance.Medium"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_gravity="center"
 	    android:gravity="center_horizontal|center_vertical"
 	    android:layout_margin="4dip"
-	    android:text="@string/widget_content_tv"
+	    android:text="@string/widget_activity_tv"
+	    android:textSize="6pt"
+	    android:background="#666666">
+	</TextView>
+	
+	<TextView
+	    android:id="@+id/widget_broadcast_tv"
+	    style="@android:style/TextAppearance.Medium"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:gravity="center_horizontal|center_vertical"
+	    android:layout_margin="4dip"
+	    android:text="@string/widget_broadcast_tv"
 	    android:textSize="6pt"
 	    android:background="#666666">
 	</TextView>
