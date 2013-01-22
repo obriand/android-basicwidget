@@ -37,23 +37,21 @@ public class WidgetReceiver extends AppWidgetProvider
 		// Update the title
 		remoteViews.setTextViewText(R.id.widget_title_tv, "Title updated !"); // On peut agir sur ces vues
 		
-		// On prepare un intent a lancer lors d'un clic
-		Intent activityIntent = new Intent(context, MainActivity.class);
-		// On lie l'intent a l'action
-		PendingIntent pendingActivityIntent = PendingIntent.getActivity(context, 0, activityIntent, 0);
+		// *** On prepare un intent a lancer lors d'un clic pour lancer une activity directement
+		Intent activityIntent = new Intent(context, MainActivity.class);		
+		PendingIntent pendingActivityIntent = PendingIntent.getActivity(context, 0, activityIntent, 0); // On lie l'intent a l'action
 		remoteViews.setOnClickPendingIntent(R.id.widget_activity_tv, pendingActivityIntent); // L'id de la view qui reagira au clic sur le widget.
 		
-		// Un intent pour lancer Google sur un click sur un autre TextView
+		// *** Un intent pour lancer Google sur un click sur un autre TextView
 		Intent googleIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
 		PendingIntent pendingGoogleIntent = PendingIntent.getActivity(context, 0, googleIntent, PendingIntent.FLAG_UPDATE_CURRENT );
 		remoteViews.setOnClickPendingIntent(R.id.widget_google_tv, pendingGoogleIntent);
 		
-		// Un intent pour lancer un boradcast, ensuite capter par la widget
-		Intent broadcastIntent = new Intent(context, WidgetReceiver.class);
-		//intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+		// *** Un intent pour lancer un boradcast, ensuite capter par la widget et lancer une activity dans le onReceive
+		Intent broadcastIntent = new Intent();		
 		broadcastIntent.setAction(ACTION_LANCER_APPLICATION); // Je cree ici ma propre action
-		// On lie l'intent a l'action
-		PendingIntent pendingBroadcastIntent = PendingIntent.getBroadcast(context, 0, broadcastIntent, 0);
+		broadcastIntent.setClassName(context, WidgetReceiver.class.getName());		
+		PendingIntent pendingBroadcastIntent = PendingIntent.getBroadcast(context, 0, broadcastIntent, 0); // On lie l'intent a l'action
 		remoteViews.setOnClickPendingIntent(R.id.widget_broadcast_tv, pendingBroadcastIntent); // L'id de la view qui reagira au clic sur le widget.
 		
 		appWidgetManager.updateAppWidget(appWidgetId, remoteViews); // On met ensuite a jour l'affichage du widget
@@ -74,7 +72,9 @@ public class WidgetReceiver extends AppWidgetProvider
 
 	protected void lancerActivityPrincipale(Context context) 
 	{
-	    Intent i = new Intent(context, MainActivity.class);
+		Toast.makeText(context, "lancerActivityPrincipale avec broadcast", Toast.LENGTH_SHORT).show(); 
+		Intent i = new Intent(context, MainActivity.class);
+	    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	    context.startActivity(i);
 	}
 
